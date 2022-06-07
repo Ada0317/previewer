@@ -1,0 +1,28 @@
+syntax = "v1"
+
+//import ""
+
+info(
+	title: "Coattails-LOL"
+	desc: "API CALL LOL ORIGIN API FORM LCU"
+	author: "Ada0317"
+	email: "zhongyang@cumt.edu.cn"
+	version: "v1.0"
+)
+
+type Request {
+	Name string `path:"name,options=you|me"`
+}
+
+type Response {
+	Message string `json:"message"`
+}
+
+@server(
+	middleware : Auth
+)
+
+service Coattails-api {
+	@handler CoattailsHandler
+	get /from/:name(Request) returns (Response)
+}
