@@ -3,8 +3,8 @@ syntax = "v1"
 //import ""
 
 info(
-	title: "Coattails-LOL"
-	desc: "API CALL LOL ORIGIN API FORM LCU"
+	title: "core-LOL"
+	desc: "Cotaltails CALL LOL ORIGIN API FORM LCU"
 	author: "Ada0317"
 	email: "zhongyang@cumt.edu.cn"
 	version: "v1.0"
@@ -20,6 +20,7 @@ type Response {
 
 @server(
 	middleware : Auth
+	group : LCU
 )
 
 service Coattails-api {

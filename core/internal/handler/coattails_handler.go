@@ -1,12 +1,12 @@
 package handler
 
 import (
-	"github.com/zeromicro/go-zero/rest/httpx"
 	"net/http"
 
-	"Coattails/internal/logic"
-	"Coattails/internal/svc"
-	"Coattails/internal/types"
+	"Coattails/core/internal/logic"
+	"Coattails/core/internal/svc"
+	"Coattails/core/internal/types"
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func CoattailsHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

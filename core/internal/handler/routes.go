@@ -4,7 +4,8 @@ package handler
 import (
 	"net/http"
 
-	"Coattails/internal/svc"
+	LCU "Coattails/core/internal/handler/LCU"
+	"Coattails/core/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )
@@ -17,7 +18,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodGet,
 					Path:    "/from/:name",
-					Handler: CoattailsHandler(serverCtx),
+					Handler: LCU.CoattailsHandler(serverCtx),
 				},
 			}...,
 		),

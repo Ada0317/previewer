@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"Coattails/internal/svc"
-	"Coattails/internal/types"
+	"Coattails/core/internal/svc"
+	"Coattails/core/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

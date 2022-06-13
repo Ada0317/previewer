@@ -1,0 +1,33 @@
+package buffApi
+
+import (
+	"net/http"
+	"time"
+)
+
+var (
+	client  *http.Client
+	baseUrl string
+)
+
+func Init(url string, timeoutSec int) {
+	client = &http.Client{
+		Timeout: time.Duration(timeoutSec) * time.Second,
+	}
+	baseUrl = url
+}
+
+//func GetCurrConf() (*conf.CalcScoreConf, error) {
+//	resp, err := client.Get(baseUrl + "/api/currConf.json")
+//	if err != nil {
+//		return nil, err
+//	}
+//	defer resp.Body.Close()
+//	bts, _ := io.ReadAll(resp.Body)
+//	scoreConf := &conf.CalcScoreConf{}
+//	err = json.Unmarshal(bts, scoreConf)
+//	if err != nil {
+//		return nil, err
+//	}
+//	return scoreConf, nil
+//}
