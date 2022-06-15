@@ -1,13 +1,12 @@
 package Coattails
 
 import (
-	"Coattails/helper"
 	"Coattails/service/ws"
 
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterRoutes(r *gin.Engine, api *helper.Api) {
+func RegisterRoutes(r *gin.Engine, api *Api) {
 	r.Any("test", api.DevHand)
 	r.GET("ws", func(c *gin.Context) {
 		ws.ServeWs(ws.ServerHub, c.Writer, c.Request)

@@ -1,8 +1,8 @@
 package lcu
 
 import (
-	"Coattails/logger"
 	"Coattails/service/lcu/models"
+	"Coattails/service/logger"
 	"context"
 	"encoding/json"
 	"errors"

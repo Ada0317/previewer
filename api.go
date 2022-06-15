@@ -2,8 +2,8 @@ package Coattails
 
 import (
 	"Coattails/conf"
-	ginApp "Coattails/gin"
 	"Coattails/global"
+	ginApp "Coattails/helper/gin"
 	"Coattails/service/db/models"
 	"Coattails/service/lcu"
 	"encoding/json"

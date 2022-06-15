@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"Coattails/global"
 	"github.com/gin-gonic/gin"
 )
 

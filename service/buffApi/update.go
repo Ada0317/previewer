@@ -1,6 +1,9 @@
 package buffApi
 
 import (
+	"Coattails/conf"
+	"encoding/json"
+	"io"
 	"net/http"
 	"time"
 )
@@ -17,17 +20,17 @@ func Init(url string, timeoutSec int) {
 	baseUrl = url
 }
 
-//func GetCurrConf() (*conf.CalcScoreConf, error) {
-//	resp, err := client.Get(baseUrl + "/api/currConf.json")
-//	if err != nil {
-//		return nil, err
-//	}
-//	defer resp.Body.Close()
-//	bts, _ := io.ReadAll(resp.Body)
-//	scoreConf := &conf.CalcScoreConf{}
-//	err = json.Unmarshal(bts, scoreConf)
-//	if err != nil {
-//		return nil, err
-//	}
-//	return scoreConf, nil
-//}
+func GetCurrConf() (*conf.CalcScoreConf, error) {
+	resp, err := client.Get(baseUrl + "/api/currConf.json")
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	bts, _ := io.ReadAll(resp.Body)
+	scoreConf := &conf.CalcScoreConf{}
+	err = json.Unmarshal(bts, scoreConf)
+	if err != nil {
+		return nil, err
+	}
+	return scoreConf, nil
+}

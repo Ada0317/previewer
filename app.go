@@ -2,9 +2,9 @@ package Coattails
 
 import (
 	"Coattails/global"
-	"Coattails/logger"
 	"Coattails/service/lcu"
 	"Coattails/service/lcu/models"
+	"Coattails/service/logger"
 	"fmt"
 	"log"
 	"sync"

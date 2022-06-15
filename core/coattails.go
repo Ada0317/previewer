@@ -1,17 +1,13 @@
 package main
 
 import (
-	conf2 "Coattails"
+	"Coattails"
 	"Coattails/bootstrap"
-	"Coattails/core/internal/config"
-	"Coattails/core/internal/handler"
-	"Coattails/core/internal/svc"
 	"flag"
 	"fmt"
 	"log"
-
-	"github.com/zeromicro/go-zero/core/conf"
-	"github.com/zeromicro/go-zero/rest"
+	"os"
+	"path/filepath"
 )
 
 var configFile = flag.String("f", "etc/coattails-api.yaml", "the config file")
@@ -22,35 +18,39 @@ var (
 	delUpgradeBin = flag.Bool("delUpgradeBin", false, "是否删除升级程序")
 )
 
-func main() {
+func flagInit() {
 	flag.Parse()
 
-	var c config.Config
-	conf.MustLoad(*configFile, &c)
+	_ = mustRunWithMain()
+}
 
-	server := rest.MustNewServer(c.RestConf)
-	defer server.Stop()
+func mustRunWithMain() error {
+	binPath, err := os.Executable() //返回当前进程的工作目录
+	if err != nil {
+		return err
+	}
+	binFileName := filepath.Base(binPath)
+	if binFileName == "hh-lol-prophet_new.exe" {
+		os.Exit(-1) //当前进程以给出的状态码退出 状态码 0 表示成功，非 0 表示出错
+	}
+	return nil
+}
 
-	ctx := svc.NewServiceContext(c)
-	handler.RegisterHandlers(server, ctx)
-
-	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
-	server.Start()
-
-	//flagInit() //暂不需要
+func main() {
+	flagInit()                 //暂不需要
 	err := bootstrap.InitApp() //初始化 获得管理员权限  监听客户端事件
 	if err != nil {
 		panic(fmt.Sprintf("初始化应用失败:%v\n", err))
 	}
 
 	//初始化
-	prophet := conf2.NewProphet()
+	prophet := Coattails.NewProphet()
 	if err = prophet.Run(); err != nil {
 		log.Fatal(err)
 	}
-	//	lolClientApi.InitCli() //
+	//lolClientApi.InitCli() //
 	//
-	//	lolClientApi.InitWsClient() //初始化websocket  监听客户端事件
+	//lolClientApi.InitWsClient() //初始化websocket  监听客户端事件
 }
 
 //func flagInit() {

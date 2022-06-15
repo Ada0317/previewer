@@ -1,12 +1,11 @@
 package Coattails
 
 import (
-	ginApp "Coattails/gin"
 	"Coattails/global"
-	"Coattails/helper"
-	"Coattails/logger"
+	ginApp "Coattails/helper/gin"
 	"Coattails/service/lcu"
 	"Coattails/service/lcu/models"
+	"Coattails/service/logger"
 
 	"context"
 	"crypto/tls"
@@ -45,7 +44,7 @@ type (
 		LcuActive    bool
 		CurrSummoner *lcu.CurrSummoner
 		cancel       func()
-		api          *helper.Api
+		api          *Api
 		mu           *sync.Mutex
 		GameState    GameState
 	}
@@ -102,7 +101,7 @@ func NewProphet( /*opts ...ApplyOption*/ ) *Prophet {
 	//} else {
 	//	opts = append(opts, WithProd())
 	//}
-	p.api = &helper.Api{P: p}
+	p.api = &Api{p: p}
 	//for _, fn := range opts {
 	//	fn(p.opts)
 	//}
@@ -120,8 +119,8 @@ func (p *Prophet) Run() error {
 
 func (p *Prophet) MonitorStart() {
 	for {
-		if !p.isLcuActive() {
-			port, token, err := lcu.GetLolClientApiInfo()
+		if !p.isLcuActive() { //客户端是否启动
+			port, token, err := lcu.GetLolClientApiInfo() //查找lol客户端进程 获取端口号和token
 			if err != nil {
 				if !errors.Is(lcu.ErrLolProcessNotFound, err) {
 					logger.Error("获取lcu info 失败", zap.Error(err))
